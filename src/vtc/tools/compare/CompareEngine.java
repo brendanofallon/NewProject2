@@ -88,9 +88,17 @@ public class CompareEngine {
 			
 		}
 		
-		System.out.println(" Perfect matches : " + perfectMatches.getCount());
-		System.out.println("Unique to " + filesToCompare.get(0) + " : " + uniqA.getCount());
-		System.out.println("Unique to " + filesToCompare.get(1) + " : " + uniqB.getCount());
+		System.out.println("\n---- Perfect matches ---- ");
+		System.out.println("\t Count : " + perfectMatches.getCount());
+		System.out.println("\t Ti/Tv : " + VariantPoolCalculator.tiTv(perfectMatches));
+		
+		System.out.println("\n---- Unique to " + filesToCompare.get(0).getName() + "---- ");
+		System.out.println("\t Count : " + uniqA.getCount());
+		System.out.println("\t Ti/Tv : " + VariantPoolCalculator.tiTv(uniqA));
+		
+		System.out.println("\n---- Unique to " + filesToCompare.get(1).getName() + "---- ");
+		System.out.println("\t Count : " + uniqB.getCount());
+		System.out.println("\t Ti/Tv : " + VariantPoolCalculator.tiTv(uniqB));
 		
 	}
 	
