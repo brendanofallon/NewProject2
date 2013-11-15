@@ -144,6 +144,7 @@ public class VariantPool implements Pool{
 	public VariantContext getVariant(String chr, int pos){
 		return getVariant(chr + ":" + Integer.toString(pos));
 	}
+	
 
 	/**
 	 * Get variant by key ('chr:pos')
@@ -296,11 +297,44 @@ public class VariantPool implements Pool{
 	 */
 	public void addVariant(VariantContext v){
 		this.addContig(v.getChr());
-		String chrPos = new String(v.getChr() + ":" + Integer.toString(v.getStart()));
-		hMap.put(chrPos, v);
-		tMap.put(chrPos, v);
+		String key = keyForVariant(v);
+		hMap.put(key, v);
+		tMap.put(key, v);
 	}
 
+	/**
+	 * Remove this variant from the pool
+	 * @param v
+	 * @return
+	 */
+	public boolean removeVariant(VariantContext v) {
+		if (v == null) {
+			return false;
+		}
+		String key = keyForVariant(v);
+		hMap.remove(key);
+		return tMap.remove(key) != null;
+	}
+
+	/**
+	 * Obtain a the key used to store this variant in the maps
+	 * @param v
+	 * @return
+	 */
+	public static String keyForVariant(VariantContext v) {
+		return v.getChr() + ":" + v.getStart();
+	}
+	
+	
+	/**
+	 * Remove this variant from the pool
+	 * @param v
+	 * @return
+	 */
+	public boolean removeVariant(String chr, int pos) {
+		return removeVariant(hMap.get(chr + ":" + pos));
+	}
+	
 	/**
 	 * Read a vcf and add VariantContext objects to the pool. 
 	 * 
@@ -591,7 +625,6 @@ public class VariantPool implements Pool{
 	private static void addPoolID(String poolID){
 		usedPoolIDs.add(poolID);
 	}
-	
 	
 	
 }

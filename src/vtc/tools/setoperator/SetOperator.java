@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.TreeSet;
 
 import org.apache.log4j.Logger;
@@ -119,7 +120,7 @@ public class SetOperator {
 	 * @return A VariantPool with all variants that intersect, including only the samples of interest.
 	 * @throws InvalidOperationException 
 	 */
-	public VariantPool performIntersect(Operation op, ArrayList<VariantPool> variantPools, IntersectType type) throws InvalidOperationException{
+	public VariantPool performIntersect(Operation op, List<VariantPool> variantPools, IntersectType type) throws InvalidOperationException{
 		
 		if(type == null){
 			throw new RuntimeException("Received null IntersectType in \'performIntersect.\' Something is very wrong!");
@@ -231,7 +232,7 @@ public class SetOperator {
 	 * @param variantPools
 	 * @return The smallest VariantPool (i.e. the one with the fewest variants)
 	 */
-	private VariantPool getSmallestVariantPool(ArrayList<VariantPool> variantPools){
+	private VariantPool getSmallestVariantPool(List<VariantPool> variantPools){
 		VariantPool smallest = null;
 		int currSize, currSmallest = -1;
 		for(VariantPool vp : variantPools){
@@ -252,10 +253,10 @@ public class SetOperator {
 	 * @return true if all VariantPools contain the variant of interest. False, otherwise.
 	 * @throws InvalidOperationException 
 	 */
-	private boolean allVariantPoolsContainVariant(ArrayList<VariantPool> variantPools, String varKey, String operationID) throws InvalidOperationException{
+	private boolean allVariantPoolsContainVariant(List<VariantPool> variantPools, String varKey, String operationID) throws InvalidOperationException{
 		VariantContext var;
 		Allele ref = null; 
-		ArrayList<Allele> alts = null;
+		List<Allele> alts = null;
 		int count = 0;
 		boolean commonAlt;
 		for(VariantPool vp : variantPools){

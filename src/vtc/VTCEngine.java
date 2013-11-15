@@ -10,6 +10,7 @@ import net.sourceforge.argparse4j.inf.Namespace;
 
 import org.apache.log4j.Logger;
 
+import vtc.tools.compare.CompareEngine;
 import vtc.tools.setoperator.SetOperatorEngine;
 import vtc.tools.varstats.VarStatsEngine;
 
@@ -64,6 +65,10 @@ public class VTCEngine implements Engine{
 			else if(tool == Tool.VAR_STATS){
                 VarStatsEngine vse = new VarStatsEngine(toolArgs);
                 vse.doStats();
+            } else if (tool == Tool.COMPARE) {
+            	CompareEngine comp = new CompareEngine(toolArgs);
+            	comp.doComparison();
+            	
             }
 			
 		} catch (ArgumentParserException e) {

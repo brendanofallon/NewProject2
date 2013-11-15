@@ -6,6 +6,7 @@ package vtc;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
 
 /**
  * @author markebbert
@@ -14,13 +15,15 @@ import java.util.Comparator;
 public enum Tool {
 
 	SET_OPERATOR("SetOperator", "SO", "Perform set operations on variant sets",
-			new ArrayList<String>(Arrays.asList(new String[]{"SO", "SetOperator"}))),
+			Arrays.asList(new String[]{"SO", "SetOperator"})),
     VAR_STATS("VarStats", "VS", "Perform various statistical analyses",
-            new ArrayList<String>(Arrays.asList(new String[]{"VS", "VarStats"})));;
+            Arrays.asList(new String[]{"VS", "VarStats"})),
+    COMPARE("Compare", "comp", "Compare two or variant files", 
+    		 Arrays.asList(new String[]{"comp", "cmp", "compare"}));
 	
 	private String name, shortCommand, briefDescription;
-	private ArrayList<String> permittedCommands;
-	private Tool(String name, String shortCommand, String briefDescription, ArrayList<String> permittedCommands){
+	private List<String> permittedCommands;
+	private Tool(String name, String shortCommand, String briefDescription, List<String> permittedCommands){
 		this.name = name;
 		this.shortCommand = shortCommand;
 		this.briefDescription = briefDescription;
@@ -39,7 +42,7 @@ public enum Tool {
 		return this.briefDescription;
 	}
 	
-	public ArrayList<String> getPermittedCommands(){
+	public List<String> getPermittedCommands(){
 		return this.permittedCommands;
 	}
 	
